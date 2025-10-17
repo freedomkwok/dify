@@ -23,17 +23,3 @@ services:
     profiles:
       - disabled
 
-  # Expose Redis port for local development
-  redis:
-    ports:
-      - "6379:6379"
-
-  # Expose Weaviate port for local development
-  weaviate:
-    ports:
-      - "8080:8080"
-
-  # Expose Plugin Daemon port for local development
-  plugin_daemon:
-    ports:
-      - "5003:5003"
