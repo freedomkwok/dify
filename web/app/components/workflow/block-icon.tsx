@@ -66,6 +66,7 @@ const getIcon = (type: BlockEnum, className: string) => {
     [BlockEnum.KnowledgeBase]: <KnowledgeBase className={className} />,
     [BlockEnum.DataSource]: <Datasource className={className} />,
     [BlockEnum.DataSourceEmpty]: <></>,
+    [BlockEnum.CustomWebserver]: <Llm className={className} />,
   }[type]
 }
 const ICON_CONTAINER_BG_COLOR_MAP: Record<string, string> = {
@@ -92,6 +93,7 @@ const ICON_CONTAINER_BG_COLOR_MAP: Record<string, string> = {
   [BlockEnum.Agent]: 'bg-util-colors-indigo-indigo-500',
   [BlockEnum.KnowledgeBase]: 'bg-util-colors-warning-warning-500',
   [BlockEnum.DataSource]: 'bg-components-icon-bg-midnight-solid',
+  [BlockEnum.CustomWebserver]: 'bg-util-colors-blue-blue-500',
 }
 const BlockIcon: FC<BlockIconProps> = ({
   type,

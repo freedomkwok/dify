@@ -50,6 +50,7 @@ export enum BlockEnum {
   DataSource = 'datasource',
   DataSourceEmpty = 'datasource-empty',
   KnowledgeBase = 'knowledge-index',
+  CustomWebserver = 'custom-webserver',
 }
 
 export enum ControlMode {

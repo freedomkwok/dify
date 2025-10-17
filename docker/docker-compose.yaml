@@ -609,7 +609,8 @@ x-shared-env: &shared-api-worker-env
 services:
   # API service
   api:
-    image: langgenius/dify-api:1.9.1
+    # image: langgenius/dify-api:1.9.1
+    build: ../api
     restart: always
     environment:
       # Use the shared environment variables.
@@ -631,13 +632,7 @@ services:
     volumes:
       # Mount the storage directory to the container, for storing user files.
       - ./volumes/app/storage:/app/api/storage
-    # TODO: Remove this entrypoint override when weaviate-client 4.17.0 is included in the next Dify release
-    entrypoint:
-      - /bin/bash
-      - -c
-      - |
-        uv pip install --system weaviate-client==4.17.0
-        exec /bin/bash /app/api/docker/entrypoint.sh
+      - ../api:/app
     networks:
       - ssrf_proxy_network
       - default
@@ -665,13 +660,6 @@ services:
     volumes:
       # Mount the storage directory to the container, for storing user files.
       - ./volumes/app/storage:/app/api/storage
-    # TODO: Remove this entrypoint override when weaviate-client 4.17.0 is included in the next Dify release
-    entrypoint:
-      - /bin/bash
-      - -c
-      - |
-        uv pip install --system weaviate-client==4.17.0
-        exec /bin/bash /app/api/docker/entrypoint.sh
     networks:
       - ssrf_proxy_network
       - default
@@ -697,7 +685,11 @@ services:
 
   # Frontend web application.
   web:
-    image: langgenius/dify-web:1.9.1
+    #image: langgenius/dify-web:1.9.1
+    build: ../web
+    volumes:
+      - ../web:/app
+    command: pnpm dev
     restart: always
     environment:
       CONSOLE_API_URL: ${CONSOLE_API_URL:-}
@@ -736,6 +728,8 @@ services:
                -c 'work_mem=${POSTGRES_WORK_MEM:-4MB}'
                -c 'maintenance_work_mem=${POSTGRES_MAINTENANCE_WORK_MEM:-64MB}'
                -c 'effective_cache_size=${POSTGRES_EFFECTIVE_CACHE_SIZE:-4096MB}'
+    ports:
+      - "${EXPOSE_POSTGRES_PORT:-5446}:5432"
     volumes:
       - ./volumes/db/data:/var/lib/postgresql/data
     healthcheck:

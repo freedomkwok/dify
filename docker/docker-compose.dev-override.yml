@@ -1,0 +1,39 @@
+# Development override for docker-compose.yaml
+# This file disables the API, web, and nginx services so you can run them locally
+# Usage: docker-compose -f docker-compose.yaml -f docker-compose.dev-override.yml up
+
+services:
+  # Disable API service - run locally with: ./dev/start-api
+  api:
+    profiles:
+      - disabled
+
+  # Disable web service - run locally with: cd web && pnpm dev
+  web:
+    profiles:
+      - disabled
+
+  # Enable worker services in Docker for development
+  # worker: (keep default configuration)
+  # worker_beat: (keep default configuration)
+
+  # Disable nginx - not needed for local development
+  # Access services directly: API on :5001, Web on :3000
+  nginx:
+    profiles:
+      - disabled
+
+  # Expose Redis port for local development
+  redis:
+    ports:
+      - "6379:6379"
+
+  # Expose Weaviate port for local development
+  weaviate:
+    ports:
+      - "8080:8080"
+
+  # Expose Plugin Daemon port for local development
+  plugin_daemon:
+    ports:
+      - "5003:5003"

@@ -97,7 +97,7 @@ const nextConfig = {
       bundler: 'turbopack'
     })
   },
-  productionBrowserSourceMaps: false, // enable browser source map generation during the production build
+  productionBrowserSourceMaps: true, // enable browser source map generation during the production build
   // Configure pageExtensions to include md and mdx
   pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
   // https://nextjs.org/docs/messages/next-image-unconfigured-host

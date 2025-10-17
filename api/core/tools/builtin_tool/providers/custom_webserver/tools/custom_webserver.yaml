@@ -1,0 +1,72 @@
+identity:
+  name: custom_webserver
+  author: Custom Developer
+  label:
+    en_US: Custom Web Server
+    zh_Hans: 自定义网络服务器
+  icon: 🌐
+description:
+  human:
+    en_US: Send queries to your custom web server and get intelligent responses processed by Dify's LLM.
+    zh_Hans: 向您的自定义网络服务器发送查询，并获得由Dify的LLM处理的智能响应。
+  llm: A tool for sending queries to a custom web server and processing the response with LLM intelligence. The server processes your query and returns structured data, which is then formatted into a natural language response.
+parameters:
+  - name: query
+    type: string
+    required: true
+    label:
+      en_US: Query
+      zh_Hans: 查询
+    human_description:
+      en_US: The query to send to your web server
+      zh_Hans: 发送到您的网络服务器的查询
+    llm_description: The query or request to send to the custom web server
+    form: llm
+  - name: server_url
+    type: string
+    required: true
+    label:
+      en_US: Server URL
+      zh_Hans: 服务器URL
+    human_description:
+      en_US: The URL of your web server (e.g., http://localhost:8000)
+      zh_Hans: 您的网络服务器的URL（例如：http://localhost:8000）
+    llm_description: The base URL of the web server to call
+    form: form
+    default: "http://localhost:8000"
+  - name: endpoint
+    type: string
+    required: false
+    label:
+      en_US: API Endpoint
+      zh_Hans: API端点
+    human_description:
+      en_US: The API endpoint to call on your server (e.g., /api/process)
+      zh_Hans: 在您的服务器上调用的API端点（例如：/api/process）
+    llm_description: The API endpoint path to call on the server
+    form: form
+    default: "/api/process"
+  - name: use_llm_processing
+    type: boolean
+    required: false
+    label:
+      en_US: Use LLM Processing
+      zh_Hans: 使用LLM处理
+    human_description:
+      en_US: Whether to use Dify's LLM to process the server response into natural language
+      zh_Hans: 是否使用Dify的LLM将服务器响应处理为自然语言
+    llm_description: Whether to process the server response with LLM for better formatting
+    form: form
+    default: true
+  - name: processing_instruction
+    type: string
+    required: false
+    label:
+      en_US: Processing Instruction
+      zh_Hans: 处理指令
+    human_description:
+      en_US: Additional instructions for how the LLM should process the server response
+      zh_Hans: LLM应如何处理服务器响应的附加指令
+    llm_description: Additional instructions for processing the server response
+    form: form
+    default: ""
